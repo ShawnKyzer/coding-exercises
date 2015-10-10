@@ -1,0 +1,1349 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JavaScript Regular Expression Excerise</title>
+      <script type="text/JavaScript" src="js/movies.js"></script>
+  </head>
+
+  <body>
+    <h3>JavaScript Regular Expression Excerise</h3>
+
+    <p>
+      NOTE: This task should be accomplished using vanilla javascript. Please
+      don't use jquery, underscore, or any libraries. Feel free to use Google
+      if you don't know how to do something.
+    </p>
+
+    <p style="margin-bottom: 0px">
+      The button below ("Fix 'em") should:
+    </p>
+
+    <ul style="margin-top: 0px">
+      <li>remove any movie released before Y2k OR with a vote count lower than 200,000.</li>
+      <li>show the number of removed movies in the "num-of-removed" span.</li>
+      <li>fix the titlization of the movies (for simplicity, the first word and any word greater than 3 characters should be capitalized).</li>
+    </ul>
+
+    <h4>You must use regular expressions to extract the necessary data from each row.</h4>
+
+    <hr>
+
+    <p>
+      <input type="button" id="fixem" value="Fix 'em">
+      <span id="num-of-removed">0</span>
+    </p>
+
+    <table id="movie-list">
+      <thead>
+        <tr>
+          <th></th>
+          <th style="text-align: left;">Movies</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="number">1.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0111161/">
+            the shawshank redemption
+            </a>
+            (1994)
+            &nbsp;
+            Rating: <b>9.3</b>/10
+            &nbsp;
+            Votes: 1,238,988
+          </td>
+        </tr>
+        <tr>
+          <td class="number">2.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0068646/">
+            the godfather
+            </a>
+            (1972)
+            &nbsp;
+            Rating: <b>9.2</b>/10
+            &nbsp;
+            Votes: 856,534
+          </td>
+        </tr>
+        <tr>
+          <td class="number">3.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0071562/">
+            the godfather: part ii
+            </a>
+            (1974)
+            &nbsp;
+            Rating: <b>9.1</b>/10
+            &nbsp;
+            Votes: 567,370
+          </td>
+        </tr>
+        <tr>
+          <td class="number">4.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0468569/">
+            the dark knight
+            </a>
+            (2008)
+            &nbsp;
+            Rating: <b>9.0</b>/10
+            &nbsp;
+            Votes: 1,201,575
+          </td>
+        </tr>
+        <tr>
+          <td class="number">5.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0060196/">
+            the good, the bad and the ugly
+            </a>
+            (1966)
+            &nbsp;
+            Rating: <b>9.0</b>/10
+            &nbsp;
+            Votes: 371,115
+          </td>
+        </tr>
+        <tr>
+          <td class="number">6.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0110912/">
+            pulp fiction
+            </a>
+            (1994)
+            &nbsp;
+            Rating: <b>9.0</b>/10
+            &nbsp;
+            Votes: 950,712
+          </td>
+        </tr>
+        <tr>
+          <td class="number">7.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0167260/">
+            the lord of the rings: the return of the king
+            </a>
+            (2003)
+            &nbsp;
+            Rating: <b>8.9</b>/10
+            &nbsp;
+            Votes: 882,928
+          </td>
+        </tr>
+        <tr>
+          <td class="number">8.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0050083/">
+            12 angry men
+            </a>
+            (1957)
+            &nbsp;
+            Rating: <b>8.9</b>/10
+            &nbsp;
+            Votes: 308,772
+          </td>
+        </tr>
+        <tr>
+          <td class="number">9.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0108052/">
+            schindler's list
+            </a>
+            (1993)
+            &nbsp;
+            Rating: <b>8.9</b>/10
+            &nbsp;
+            Votes: 625,811
+          </td>
+        </tr>
+        <tr>
+          <td class="number">10.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0137523/">
+            fight club
+            </a>
+            (1999)
+            &nbsp;
+            Rating: <b>8.9</b>/10
+            &nbsp;
+            Votes: 942,304
+          </td>
+        </tr>
+        <tr>
+          <td class="number">11.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0120737/">
+            the lord of the rings: the fellowship of the ring
+            </a>
+            (2001)
+            &nbsp;
+            Rating: <b>8.8</b>/10
+            &nbsp;
+            Votes: 909,421
+          </td>
+        </tr>
+        <tr>
+          <td class="number">12.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt1375666/">
+            inception
+            </a>
+            (2010)
+            &nbsp;
+            Rating: <b>8.8</b>/10
+            &nbsp;
+            Votes: 989,405
+          </td>
+        </tr>
+        <tr>
+          <td class="number">13.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0080684/">
+            star wars: episode v - the empire strikes back
+            </a>
+            (1980)
+            &nbsp;
+            Rating: <b>8.8</b>/10
+            &nbsp;
+            Votes: 586,529
+          </td>
+        </tr>
+        <tr>
+          <td class="number">14.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0109830/">
+            forrest gump
+            </a>
+            (1994)
+            &nbsp;
+            Rating: <b>8.8</b>/10
+            &nbsp;
+            Votes: 842,849
+          </td>
+        </tr>
+        <tr>
+          <td class="number">15.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0167261/">
+            the lord of the rings: the two towers
+            </a>
+            (2002)
+            &nbsp;
+            Rating: <b>8.8</b>/10
+            &nbsp;
+            Votes: 794,462
+          </td>
+        </tr>
+        <tr>
+          <td class="number">16.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0073486/">
+            one flew over the cuckoo's nest
+            </a>
+            (1975)
+            &nbsp;
+            Rating: <b>8.8</b>/10
+            &nbsp;
+            Votes: 512,956
+          </td>
+        </tr>
+        <tr>
+          <td class="number">17.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0047478/">
+            seven samurai
+            </a>
+            (1954)
+            &nbsp;
+            Rating: <b>8.8</b>/10
+            &nbsp;
+            Votes: 179,020
+          </td>
+        </tr>
+        <tr>
+          <td class="number">18.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0099685/">
+            goodfellas
+            </a>
+            (1990)
+            &nbsp;
+            Rating: <b>8.7</b>/10
+            &nbsp;
+            Votes: 538,038
+          </td>
+        </tr>
+        <tr>
+          <td class="number">19.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0076759/">
+            star wars
+            </a>
+            (1977)
+            &nbsp;
+            Rating: <b>8.7</b>/10
+            &nbsp;
+            Votes: 656,622
+          </td>
+        </tr>
+        <tr>
+          <td class="number">20.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0133093/">
+            the matrix
+            </a>
+            (1999)
+            &nbsp;
+            Rating: <b>8.7</b>/10
+            &nbsp;
+            Votes: 877,095
+          </td>
+        </tr>
+        <tr>
+          <td class="number">21.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0317248/">
+            city of god
+            </a>
+            (2002)
+            &nbsp;
+            Rating: <b>8.7</b>/10
+            &nbsp;
+            Votes: 403,615
+          </td>
+        </tr>
+        <tr>
+          <td class="number">22.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0114814/">
+            the usual suspects
+            </a>
+            (1995)
+            &nbsp;
+            Rating: <b>8.7</b>/10
+            &nbsp;
+            Votes: 545,643
+          </td>
+        </tr>
+        <tr>
+          <td class="number">23.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0038650/">
+            it's a wonderful life
+            </a>
+            (1946)
+            &nbsp;
+            Rating: <b>8.7</b>/10
+            &nbsp;
+            Votes: 204,894
+          </td>
+        </tr>
+        <tr>
+          <td class="number">24.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0064116/">
+            once upon a time in the west
+            </a>
+            (1968)
+            &nbsp;
+            Rating: <b>8.7</b>/10
+            &nbsp;
+            Votes: 163,971
+          </td>
+        </tr>
+        <tr>
+          <td class="number">25.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0114369/">
+            se7en
+            </a>
+            (1995)
+            &nbsp;
+            Rating: <b>8.7</b>/10
+            &nbsp;
+            Votes: 722,670
+          </td>
+        </tr>
+        <tr>
+          <td class="number">26.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0102926/">
+            the silence of the lambs
+            </a>
+            (1991)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 612,834
+          </td>
+        </tr>
+        <tr>
+          <td class="number">27.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0118799/">
+            life is beautiful
+            </a>
+            (1997)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 280,697
+          </td>
+        </tr>
+        <tr>
+          <td class="number">28.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0021749/">
+            city lights
+            </a>
+            (1931)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 74,118
+          </td>
+        </tr>
+        <tr>
+          <td class="number">29.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0110413/">
+            léon: the professional
+            </a>
+            (1994)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 523,778
+          </td>
+        </tr>
+        <tr>
+          <td class="number">30.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0034583/">
+            casablanca
+            </a>
+            (1942)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 306,163
+          </td>
+        </tr>
+        <tr>
+          <td class="number">31.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt1675434/">
+            the intouchables
+            </a>
+            (2011)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 313,081
+          </td>
+        </tr>
+        <tr>
+          <td class="number">32.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0245429/">
+            spirited away
+            </a>
+            (2001)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 289,466
+          </td>
+        </tr>
+        <tr>
+          <td class="number">33.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0120586/">
+            american history x
+            </a>
+            (1998)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 575,572
+          </td>
+        </tr>
+        <tr>
+          <td class="number">34.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0082971/">
+            raiders of the lost ark
+            </a>
+            (1981)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 490,694
+          </td>
+        </tr>
+        <tr>
+          <td class="number">35.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0047396/">
+            rear window
+            </a>
+            (1954)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 237,764
+          </td>
+        </tr>
+        <tr>
+          <td class="number">36.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0027977/">
+            modern times
+            </a>
+            (1936)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 96,562
+          </td>
+        </tr>
+        <tr>
+          <td class="number">37.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0120815/">
+            saving private ryan
+            </a>
+            (1998)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 626,019
+          </td>
+        </tr>
+        <tr>
+          <td class="number">38.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0054215/">
+            psycho
+            </a>
+            (1960)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 309,501
+          </td>
+        </tr>
+        <tr>
+          <td class="number">39.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt1345836/">
+            the dark knight rises
+            </a>
+            (2012)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 798,183
+          </td>
+        </tr>
+        <tr>
+          <td class="number">40.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0043014/">
+            sunset blvd.
+            </a>
+            (1950)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 105,740
+          </td>
+        </tr>
+        <tr>
+          <td class="number">41.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0986264/">
+            like stars on earth
+            </a>
+            (2007)
+            &nbsp;
+            Rating: <b>8.6</b>/10
+            &nbsp;
+            Votes: 53,654
+          </td>
+        </tr>
+        <tr>
+          <td class="number">42.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0057012/">
+            dr. strangelove or: how i learned to stop worrying and love the bomb
+            </a>
+            (1964)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 271,809
+          </td>
+        </tr>
+        <tr>
+          <td class="number">43.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0209144/">
+            memento
+            </a>
+            (2000)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 628,836
+          </td>
+        </tr>
+        <tr>
+          <td class="number">44.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0253474/">
+            the pianist
+            </a>
+            (2002)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 347,009
+          </td>
+        </tr>
+        <tr>
+          <td class="number">45.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0103064/">
+            terminator 2: judgment day
+            </a>
+            (1991)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 546,721
+          </td>
+        </tr>
+        <tr>
+          <td class="number">46.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0120689/">
+            the green mile
+            </a>
+            (1999)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 523,335
+          </td>
+        </tr>
+        <tr>
+          <td class="number">47.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0078788/">
+            apocalypse now
+            </a>
+            (1979)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 344,901
+          </td>
+        </tr>
+        <tr>
+          <td class="number">48.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0172495/">
+            gladiator
+            </a>
+            (2000)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 692,127
+          </td>
+        </tr>
+        <tr>
+          <td class="number">49.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0095765/">
+            cinema paradiso
+            </a>
+            (1988)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 108,545
+          </td>
+        </tr>
+        <tr>
+          <td class="number">50.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0407887/">
+            the departed
+            </a>
+            (2006)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 624,567
+          </td>
+        </tr>
+        <tr>
+          <td class="number">51.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0032553/">
+            the great dictator
+            </a>
+            (1940)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 93,159
+          </td>
+        </tr>
+        <tr>
+          <td class="number">52.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt1853728/">
+            django unchained
+            </a>
+            (2012)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 612,203
+          </td>
+        </tr>
+        <tr>
+          <td class="number">53.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0088763/">
+            back to the future
+            </a>
+            (1985)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 500,435
+          </td>
+        </tr>
+        <tr>
+          <td class="number">54.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0405094/">
+            the lives of others
+            </a>
+            (2006)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 194,062
+          </td>
+        </tr>
+        <tr>
+          <td class="number">55.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0050825/">
+            paths of glory
+            </a>
+            (1957)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 88,443
+          </td>
+        </tr>
+        <tr>
+          <td class="number">56.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0482571/">
+            the prestige
+            </a>
+            (2006)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 582,510
+          </td>
+        </tr>
+        <tr>
+          <td class="number">57.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0405508/">
+            colour it yellow
+            </a>
+            (2006)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 40,708
+          </td>
+        </tr>
+        <tr>
+          <td class="number">58.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0078748/">
+            alien
+            </a>
+            (1979)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 407,410
+          </td>
+        </tr>
+        <tr>
+          <td class="number">59.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0367110/">
+            swades
+            </a>
+            (2004)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 36,768
+          </td>
+        </tr>
+        <tr>
+          <td class="number">60.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0110357/">
+            the lion king
+            </a>
+            (1994)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 431,244
+          </td>
+        </tr>
+        <tr>
+          <td class="number">61.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt1187043/">
+            3 idiots
+            </a>
+            (2009)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 114,348
+          </td>
+        </tr>
+        <tr>
+          <td class="number">62.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0211915/">
+            amélie
+            </a>
+            (2001)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 395,144
+          </td>
+        </tr>
+        <tr>
+          <td class="number">63.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0022100/">
+            m
+            </a>
+            (1931)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 76,158
+          </td>
+        </tr>
+        <tr>
+          <td class="number">64.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt1832382/">
+            a separation
+            </a>
+            (2011)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 110,918
+          </td>
+        </tr>
+        <tr>
+          <td class="number">65.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0081505/">
+            the shining
+            </a>
+            (1980)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 436,395
+          </td>
+        </tr>
+        <tr>
+          <td class="number">66.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0910970/">
+            wall·e
+            </a>
+            (2008)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 498,793
+          </td>
+        </tr>
+        <tr>
+          <td class="number">67.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0053125/">
+            north by northwest
+            </a>
+            (1959)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 171,448
+          </td>
+        </tr>
+        <tr>
+          <td class="number">68.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt1646971/">
+            how to train your dragon 2
+            </a>
+            (2014)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 35,792
+          </td>
+        </tr>
+        <tr>
+          <td class="number">69.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0095327/">
+            grave of the fireflies
+            </a>
+            (1988)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 90,271
+          </td>
+        </tr>
+        <tr>
+          <td class="number">70.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0169547/">
+            american beauty
+            </a>
+            (1999)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 625,599
+          </td>
+        </tr>
+        <tr>
+          <td class="number">71.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0082096/">
+            das boot
+            </a>
+            (1981)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 131,493
+          </td>
+        </tr>
+        <tr>
+          <td class="number">72.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0051201/">
+            witness for the prosecution
+            </a>
+            (1957)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 42,818
+          </td>
+        </tr>
+        <tr>
+          <td class="number">73.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0033467/">
+            citizen kane
+            </a>
+            (1941)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 235,406
+          </td>
+        </tr>
+        <tr>
+          <td class="number">74.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt2265171/">
+            the raid 2
+            </a>
+            (2014)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 28,973
+          </td>
+        </tr>
+        <tr>
+          <td class="number">75.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0036775/">
+            double indemnity
+            </a>
+            (1944)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 73,896
+          </td>
+        </tr>
+        <tr>
+          <td class="number">76.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0119698/">
+            princess mononoke
+            </a>
+            (1997)
+            &nbsp;
+            Rating: <b>8.5</b>/10
+            &nbsp;
+            Votes: 158,231
+          </td>
+        </tr>
+        <tr>
+          <td class="number">77.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0090605/">
+            aliens
+            </a>
+            (1986)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 368,664
+          </td>
+        </tr>
+        <tr>
+          <td class="number">78.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0052357/">
+            vertigo
+            </a>
+            (1958)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 183,363
+          </td>
+        </tr>
+        <tr>
+          <td class="number">79.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0435761/">
+            toy story 3
+            </a>
+            (2010)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 374,956
+          </td>
+        </tr>
+        <tr>
+          <td class="number">80.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0871510/">
+            chakde! india
+            </a>
+            (2007)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 26,526
+          </td>
+        </tr>
+        <tr>
+          <td class="number">81.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0364569/">
+            oldboy
+            </a>
+            (2003)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 257,810
+          </td>
+        </tr>
+        <tr>
+          <td class="number">82.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0087843/">
+            once upon a time in america
+            </a>
+            (1984)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 165,817
+          </td>
+        </tr>
+        <tr>
+          <td class="number">83.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0056592/">
+            to kill a mockingbird
+            </a>
+            (1962)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 161,509
+          </td>
+        </tr>
+        <tr>
+          <td class="number">84.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0066921/">
+            a clockwork orange
+            </a>
+            (1971)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 401,547
+          </td>
+        </tr>
+        <tr>
+          <td class="number">85.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0056172/">
+            lawrence of arabia
+            </a>
+            (1962)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 145,766
+          </td>
+        </tr>
+        <tr>
+          <td class="number">86.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0112573/">
+            braveheart
+            </a>
+            (1995)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 543,642
+          </td>
+        </tr>
+        <tr>
+          <td class="number">87.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0180093/">
+            requiem for a dream
+            </a>
+            (2000)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 429,778
+          </td>
+        </tr>
+        <tr>
+          <td class="number">88.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt1877832/">
+            x-men: days of future past
+            </a>
+            (2014)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 173,901
+          </td>
+        </tr>
+        <tr>
+          <td class="number">89.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0040522/">
+            bicycle thieves
+            </a>
+            (1948)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 67,091
+          </td>
+        </tr>
+        <tr>
+          <td class="number">90.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0075314/">
+            taxi driver
+            </a>
+            (1976)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 367,553
+          </td>
+        </tr>
+        <tr>
+          <td class="number">91.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0012349/">
+            the kid
+            </a>
+            (1921)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 43,342
+          </td>
+        </tr>
+        <tr>
+          <td class="number">92.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0086190/">
+            star wars: episode vi - return of the jedi
+            </a>
+            (1983)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 465,404
+          </td>
+        </tr>
+        <tr>
+          <td class="number">93.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0042192/">
+            all about eve
+            </a>
+            (1950)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 64,122
+          </td>
+        </tr>
+        <tr>
+          <td class="number">94.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0338013/">
+            eternal sunshine of the spotless mind
+            </a>
+            (2004)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 494,212
+          </td>
+        </tr>
+        <tr>
+          <td class="number">95.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0045152/">
+            singin' in the rain
+            </a>
+            (1952)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 112,454
+          </td>
+        </tr>
+        <tr>
+          <td class="number">96.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0112870/">
+            dilwale dulhania le jayenge
+            </a>
+            (1995)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 25,737
+          </td>
+        </tr>
+        <tr>
+          <td class="number">97.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0105236/">
+            reservoir dogs
+            </a>
+            (1992)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 472,998
+          </td>
+        </tr>
+        <tr>
+          <td class="number">98.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0055630/">
+            yojimbo
+            </a>
+            (1961)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 55,592
+          </td>
+        </tr>
+        <tr>
+          <td class="number">99.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0040897/">
+            the treasure of the sierra madre
+            </a>
+            (1948)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 61,398
+          </td>
+        </tr>
+        <tr>
+          <td class="number">100.</td>
+          <td class="title">
+            <a href="http://www.imdb.com/title/tt0042876/">
+            rashomon
+            </a>
+            (1950)
+            &nbsp;
+            Rating: <b>8.4</b>/10
+            &nbsp;
+            Votes: 77,103
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
